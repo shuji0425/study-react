@@ -1,45 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Hello from './components/Hello';
-import { Counter } from './components/Counter';
-import ClickButton from './components/ClickButton';
-import Form from './components/Form';
-import FormWithMultipleInputs from './components/FormWithMultipleInputs';
-import FormWithReducer from './components/FormWithReducer';
-import { CounterProvider } from './context/CounterContext';
-import { FormProvider } from './context/FormContext';
-import { FormPreview } from './components/FormPreview';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Navigation } from './components/Navigation';
+import { AnimatedRoutes } from './components/AnimatedRoutes';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Hello name="React" />
-        <CounterProvider>
-          <Counter />
-        </CounterProvider>
-        <ClickButton />
-        <FormProvider>
-          <FormWithMultipleInputs />
-          <FormPreview />
-        </FormProvider>
-        <Form />
-        <FormWithReducer />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navigation />
+      <AnimatedRoutes />
+    </Router>
   );
 }
 
