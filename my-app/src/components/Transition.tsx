@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import HeavyList from "../hooks/useTransition";
+import useRotation from "../hooks/useRotation";
 
 const ManyItems = () => {
   const { list, isPending, addItems } = HeavyList();
-  const [rotateDegree, setRotateDegree] = useState(0);
   const [isClockwise, setIsClockwise] = useState(true);
 
   const calculatePositions = () => {
-    const radius = 150;
-    const centerX = 200;
-    const centerY = 200;
+    const radius = 250;
+    const centerX = 300;
+    const centerY = 300;
     const angleStep = (2 * Math.PI) / list.length;
 
     return list.map((_, index) => {
@@ -20,22 +20,15 @@ const ManyItems = () => {
     });
   };
 
+  // 円の配置
   const positions = calculatePositions();
+  // 円を回す
+  const rotateDegree = useRotation(isClockwise);
 
   // 回転
   const rotateCircle = () => {
     setIsClockwise((prev) => !prev);
   }
-
-  // 回転を連続で実行
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRotateDegree((prevDegree) => {
-        return isClockwise ? prevDegree + 1 : prevDegree - 1;
-      });
-    }, 10);
-    return () => clearInterval(interval);
-  }, [isClockwise]);
 
   return (
     <div>
@@ -43,8 +36,8 @@ const ManyItems = () => {
         {isPending ? "Loading..." : "Add Items"}
       </button>
       <div className="grid grid-cols-50 gap-2">
-        <svg width="400" height="400" style={{ border: "1px solid black" }}>
-          <g transform={`rotate(${rotateDegree}, 200, 200)`}>
+        <svg width="600" height="600" style={{ border: "1px solid black" }}>
+          <g transform={`rotate(${rotateDegree}, 300, 300)`}>
           {positions.map((pos, index) => (
             <circle key={index} cx={pos.x} cy={pos.y} r="10" fill="blue">
               <text x={pos.x} y={pos.y} fontSize="12" textAnchor="middle" fill="white">
