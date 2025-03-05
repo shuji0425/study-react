@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import ManyItems from "../components/Transition";
 
 export const Home = () => {
   return (
@@ -10,6 +11,7 @@ export const Home = () => {
     className="p-6"
     >
       <h1 className="text-2xl font-bold">ホームページ</h1>
+      <ManyItems />
     </motion.div>
   );
 };
